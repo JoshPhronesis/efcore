@@ -751,6 +751,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             return scalarSubqueryExpression.Update(Visit(scalarSubqueryExpression.Subquery));
         }
+
         /// <summary>
         ///     Visits a <see cref="SqlBinaryExpression"/> and computes its nullability.
         /// </summary>
@@ -758,7 +759,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="allowOptimizedExpansion"> A bool value indicating if optimized expansion which considers null value as false value is allowed. </param>
         /// <param name="nullable"> A bool value indicating whether the sql expression is nullable. </param>
         /// <returns> An optimized sql expression. </returns>
-
         protected virtual SqlExpression VisitSqlBinary(
             [NotNull] SqlBinaryExpression sqlBinaryExpression, bool allowOptimizedExpansion, out bool nullable)
         {
@@ -862,7 +862,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             nullable = leftNullable || rightNullable;
-
             var result = sqlBinaryExpression.Update(left, right);
 
             return result is SqlBinaryExpression sqlBinaryResult
@@ -876,6 +875,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ? (SqlExpression)_sqlExpressionFactory.Constant(string.Empty, typeMapping)
                 : _sqlExpressionFactory.Coalesce(argument, _sqlExpressionFactory.Constant(string.Empty, typeMapping));
         }
+
         /// <summary>
         ///     Visits a <see cref="SqlConstantExpression"/> and computes its nullability.
         /// </summary>
@@ -883,7 +883,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="allowOptimizedExpansion"> A bool value indicating if optimized expansion which considers null value as false value is allowed. </param>
         /// <param name="nullable"> A bool value indicating whether the sql expression is nullable. </param>
         /// <returns> An optimized sql expression. </returns>
-
         protected virtual SqlExpression VisitSqlConstant(
             [NotNull] SqlConstantExpression sqlConstantExpression, bool allowOptimizedExpansion, out bool nullable)
         {
@@ -893,6 +892,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             return sqlConstantExpression;
         }
+
         /// <summary>
         ///     Visits a <see cref="SqlFragmentExpression"/> and computes its nullability.
         /// </summary>
@@ -900,7 +900,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="allowOptimizedExpansion"> A bool value indicating if optimized expansion which considers null value as false value is allowed. </param>
         /// <param name="nullable"> A bool value indicating whether the sql expression is nullable. </param>
         /// <returns> An optimized sql expression. </returns>
-
         protected virtual SqlExpression VisitSqlFragment(
             [NotNull] SqlFragmentExpression sqlFragmentExpression, bool allowOptimizedExpansion, out bool nullable)
         {
@@ -910,6 +909,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             return sqlFragmentExpression;
         }
+
         /// <summary>
         ///     Visits a <see cref="SqlFunctionExpression"/> and computes its nullability.
         /// </summary>
@@ -917,7 +917,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="allowOptimizedExpansion"> A bool value indicating if optimized expansion which considers null value as false value is allowed. </param>
         /// <param name="nullable"> A bool value indicating whether the sql expression is nullable. </param>
         /// <returns> An optimized sql expression. </returns>
-
         protected virtual SqlExpression VisitSqlFunction(
             [NotNull] SqlFunctionExpression sqlFunctionExpression, bool allowOptimizedExpansion, out bool nullable)
         {
@@ -951,6 +950,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             return sqlFunctionExpression.Update(instance, arguments);
         }
+
         /// <summary>
         ///     Visits a <see cref="SqlParameterExpression"/> and computes its nullability.
         /// </summary>
@@ -958,7 +958,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="allowOptimizedExpansion"> A bool value indicating if optimized expansion which considers null value as false value is allowed. </param>
         /// <param name="nullable"> A bool value indicating whether the sql expression is nullable. </param>
         /// <returns> An optimized sql expression. </returns>
-
         protected virtual SqlExpression VisitSqlParameter(
             [NotNull] SqlParameterExpression sqlParameterExpression, bool allowOptimizedExpansion, out bool nullable)
         {
@@ -970,6 +969,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ? _sqlExpressionFactory.Constant(null, sqlParameterExpression.TypeMapping)
                 : (SqlExpression)sqlParameterExpression;
         }
+
         /// <summary>
         ///     Visits a <see cref="SqlUnaryExpression"/> and computes its nullability.
         /// </summary>
@@ -977,7 +977,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="allowOptimizedExpansion"> A bool value indicating if optimized expansion which considers null value as false value is allowed. </param>
         /// <param name="nullable"> A bool value indicating whether the sql expression is nullable. </param>
         /// <returns> An optimized sql expression. </returns>
-
         protected virtual SqlExpression VisitSqlUnary(
             [NotNull] SqlUnaryExpression sqlUnaryExpression, bool allowOptimizedExpansion, out bool nullable)
         {
